@@ -1,0 +1,29 @@
+{
+    "contacts": [
+        {
+            "name": "Budi Santoso",
+            "number": "081234567890",
+            "category": "Keluarga"
+        },
+        {
+            "name": "Siti Rahayu",
+            "number": "089876543210",
+            "category": "Kantor"
+        },
+        {
+            "name": "Ahmad Hidayat",
+            "number": "087812345678",
+            "category": "Teman"
+        },
+        {
+            "name": "Dewi Lestari",
+            "number": "089912345678",
+            "category": "Kantor"
+        },
+        {
+            "name": "Rudi Hermawan",
+            "number": "081112223334",
+            "category": "Keluarga"
+        }
+    ]
+} 
