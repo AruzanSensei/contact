@@ -1,29 +1,14 @@
 {
     "contacts": [
         {
-            "name": "Budi Santoso",
-            "number": "081234567890",
+            "name": "Syakira",
+            "number": "085859534386",
             "category": "Keluarga"
         },
         {
-            "name": "Siti Rahayu",
-            "number": "089876543210",
-            "category": "Kantor"
-        },
-        {
-            "name": "Ahmad Hidayat",
-            "number": "087812345678",
-            "category": "Teman"
-        },
-        {
-            "name": "Dewi Lestari",
-            "number": "089912345678",
-            "category": "Kantor"
-        },
-        {
-            "name": "Rudi Hermawan",
-            "number": "081112223334",
+            "name": "Teh Yayan",
+            "number": "08551082114",
             "category": "Keluarga"
-        }
+        },
     ]
 } 
