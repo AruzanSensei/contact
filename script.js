@@ -33,21 +33,35 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading contacts:', error));
 
+    // Normalize phone number to format 62XXXXXXXXXX
+    function normalizePhone(number) {
+        let cleaned = number.replace(/\D/g, ''); // Hapus semua non-digit
+        if (cleaned.startsWith('0')) {
+            cleaned = '62' + cleaned.slice(1);
+        } else if (cleaned.startsWith('62')) {
+            // do nothing
+        } else if (cleaned.startsWith('8')) {
+            cleaned = '62' + cleaned;
+        }
+        return cleaned;
+    }
+
     // Display contacts in table
     function displayContacts(contactsToShow) {
         contactsTableBody.innerHTML = '';
         contactsToShow.forEach(contact => {
+            const normalizedNumber = normalizePhone(contact.number);
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${contact.name}</td>
                 <td>
-                    <a href="https://wa.me/${contact.number}" class="phone-number" target="_blank">
-                        ${contact.number}
+                    <a href="https://wa.me/${normalizedNumber}" class="phone-number" target="_blank">
+                        ${normalizedNumber}
                     </a>
                 </td>
                 <td class="category-column"><span class="category-badge category-${contact.category.toLowerCase()}">${contact.category}</span></td>
                 <td class="action-column">
-                    <a href="https://wa.me/${contact.number}" class="whatsapp-btn" target="_blank" title="Kirim Pesan WhatsApp">
+                    <a href="https://wa.me/${normalizedNumber}" class="whatsapp-btn" target="_blank" title="Kirim Pesan WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </td>
@@ -80,10 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let valueA = a[column];
             let valueB = b[column];
 
-            // Special handling for numbers
             if (column === 'number') {
-                valueA = valueA.replace(/\D/g, '');
-                valueB = valueB.replace(/\D/g, '');
+                valueA = normalizePhone(valueA);
+                valueB = normalizePhone(valueB);
             }
 
             if (valueA < valueB) {
@@ -111,9 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchTerm = e.target.value.toLowerCase();
         const filteredContacts = contacts.filter(contact => 
             contact.name.toLowerCase().includes(searchTerm) ||
-            contact.number.includes(searchTerm) ||
+            normalizePhone(contact.number).includes(searchTerm) ||
             contact.category.toLowerCase().includes(searchTerm)
         );
         displayContacts(filteredContacts);
     });
-}); 
+});
